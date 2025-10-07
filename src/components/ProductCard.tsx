@@ -10,7 +10,6 @@ interface Product {
 }
 
 export default function ProductCard({
-  id,
   name,
   price,
   image,
@@ -31,7 +30,7 @@ export default function ProductCard({
   // Chế độ bình thường (grid/list)
   return (
     <div className="border rounded-xl bg-white shadow hover:shadow-lg hover:scale-105 transition-transform duration-300">
-      <Link to={`/product/${id}`}>
+      <Link to="">
         <img
           src={image}
           alt={name}

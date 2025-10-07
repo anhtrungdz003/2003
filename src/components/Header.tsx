@@ -1,6 +1,8 @@
 import { ShoppingCart, User, Search } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import AuthModal from "./AuthModal";
+import logo from "@/assets/images/mixiao.png";
 
 export default function Header() {
   const [showAuth, setShowAuth] = useState(false);
@@ -10,9 +12,10 @@ export default function Header() {
       <header className="bg-amber-50 shadow-md fixed top-0 left-0 w-full z-50">
         <div className="max-w-7xl mx-auto flex items-center justify-between p-4 flex-wrap gap-3">
           {/* Logo */}
-          <div className="text-2xl font-bold text-amber-600">
-            🍹 2003 Drinks
+          <div>
+            <img src={logo} alt="2003 Mixiao" className="w-16 h-auto" />
           </div>
+          <div className="text-4xl font-bold text-amber-600">Mixiao</div>
 
           {/* Menu */}
           <nav className="flex gap-6 text-gray-700 font-medium flex-wrap justify-center">
@@ -41,10 +44,12 @@ export default function Header() {
               <Search className="text-gray-500 w-5 h-5" />
             </div>
 
-            <ShoppingCart
-              className="text-gray-700 cursor-pointer hover:text-amber-600"
-              size={22}
-            />
+            <Link to="/cart">
+              <ShoppingCart
+                className="text-gray-700 cursor-pointer hover:text-amber-600 transition"
+                size={22}
+              />
+            </Link>
             <button
               onClick={() => setShowAuth(true)}
               className="flex items-center gap-1 bg-amber-500 text-white px-3 py-1 rounded-full hover:bg-amber-600 transition"

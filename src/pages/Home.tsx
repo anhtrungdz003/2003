@@ -1,8 +1,12 @@
 // src/pages/HomePage.tsx
-import React from "react";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import FeaturedProducts from "@/components/FeaturedProducts";
+import RatingSection from "@/components/RatingSection";
+import caphe from "@/assets/images/caphe.jpg";
+import trasua from "@/assets/images/trasua.jpg";
+import matcha from "@/assets/images/matcha.jpg";
+import trachanh from "@/assets/images/trachanh.jpg";
+import sinhto from "@/assets/images/sinhto.jpg";
 
 export default function HomePage() {
   // Dữ liệu mẫu cho sản phẩm nổi bật
@@ -10,27 +14,27 @@ export default function HomePage() {
     {
       id: 1,
       name: "Cà phê sữa đá",
-      image: "/images/cafe.jpg",
+      image: caphe,
     },
     {
       id: 2,
       name: "Trà sữa truyền thống",
-      image: "/images/trasua.jpg",
+      image: trasua,
     },
     {
       id: 3,
       name: "Matcha Latte",
-      image: "/images/matcha.jpg",
+      image: matcha,
     },
     {
       id: 4,
       name: "Trà chanh mật ong",
-      image: "/images/tea.jpg",
+      image: trachanh,
     },
     {
       id: 5,
       name: "Sinh tố bơ",
-      image: "/images/sinh-to-bo.jpg",
+      image: sinhto,
     },
   ];
 
@@ -38,7 +42,6 @@ export default function HomePage() {
     <div className="flex flex-col min-h-screen bg-amber-50">
       {/* Header cố định trên cùng */}
       <Header />
-
       {/* Nội dung chính */}
       <main className="flex-1 mt-[72px]">
         {/* Banner sản phẩm nổi bật */}
@@ -56,10 +59,9 @@ export default function HomePage() {
             để cảm nhận hương vị khác biệt!
           </p>
         </section>
+        <RatingSection />
       </main>
-
-      {/* Footer duy nhất */}
-      <Footer />
+      {/* Footer duy nhất */}\
     </div>
   );
 }

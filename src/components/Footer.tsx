@@ -27,7 +27,7 @@ export default function Footer() {
         {/* Each column has internal horizontal padding so content doesn't stick to edges */}
         <div className="px-6">
           <h2 className="text-2xl font-bold text-amber-700 mb-4">
-            Beverage 2003
+            Mixiao
           </h2>
           <p className="text-sm leading-relaxed">
             Chúng tôi cung cấp các loại đồ uống tươi ngon, đa dạng từ cà phê,
@@ -66,13 +66,13 @@ export default function Footer() {
           <h3 className="font-semibold mb-4">Liên hệ</h3>
           <ul className="space-y-2 mb-4 text-sm">
             <li className="flex items-center gap-2">
-              <MapPin size={16} /> 123 Đường XYZ, Hà Nội
+              <MapPin size={16} /> 123 Vĩnh Tường Vĩnh Phúc
             </li>
             <li className="flex items-center gap-2">
-              <Phone size={16} /> 0123 456 789
+              <Phone size={16} /> 0366559916
             </li>
             <li className="flex items-center gap-2">
-              <Mail size={16} /> support@beverage2003.com
+              <Mail size={16} /> support@mixiao2003.com
             </li>
           </ul>
           <iframe
@@ -121,7 +121,7 @@ export default function Footer() {
 
       {/* copyright line (full width) */}
       <div className="bg-amber-100 text-gray-600 text-sm text-center py-4 w-full">
-        © 2025 Beverage 2003. All rights reserved.
+        © 2025 Mixiao. All rights reserved.
       </div>
     </footer>
   );

@@ -1,13 +1,10 @@
-// src/components/FeaturedProducts.tsx
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
-
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Product {
   id: number;
   name: string;
-  image: string; // ✅ bỏ price
+  image: string;
 }
 
 interface FeaturedProductsProps {
@@ -15,42 +12,45 @@ interface FeaturedProductsProps {
 }
 
 export default function FeaturedProducts({ products }: FeaturedProductsProps) {
-  return (
-    <div className="w-full bg-gradient-to-r from-amber-50 to-orange-50 py-8">
-      <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-6 text-amber-700">
-          🌟 Sản phẩm nổi bật 🌟
-        </h2>
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-        <Swiper
-          modules={[Autoplay, Pagination]}
-          autoplay={{ delay: 2500, disableOnInteraction: false }}
-          pagination={{ clickable: true }}
-          spaceBetween={20}
-          slidesPerView={1}
-          breakpoints={{
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-          }}
-          className="pb-10"
-        >
-          {products.map((item) => (
-            <SwiperSlide key={item.id}>
-              <div className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-56 object-cover"
-                />
-                <div className="p-4 text-center">
-                  <h3 className="font-semibold text-lg text-gray-800">
-                    {item.name}
-                  </h3>
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+  // Tự động chuyển ảnh sau 5s
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % products.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [products.length]);
+
+  return (
+    <div className="w-full bg-gradient-to-r from-amber-50 to-orange-50 py-6">
+      <h2 className="text-3xl font-bold text-center mb-4 text-amber-700">
+        🌟 Sản phẩm nổi bật 🌟
+      </h2>
+
+      <div className="relative w-full h-[350px] md:h-[400px] lg:h-[450px] mx-auto rounded-2xl overflow-hidden max-w-5xl">
+        <AnimatePresence>
+          <motion.div
+            key={products[currentIndex].id}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.2 }}
+            className="absolute top-0 left-0 w-full h-full"
+          >
+            <img
+              src={products[currentIndex].image}
+              alt={products[currentIndex].name}
+              className="w-full h-full object-cover rounded-2xl"
+            />
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center text-white bg-black/30 px-4 py-2 rounded-lg">
+              <h3 className="text-lg md:text-xl font-semibold">
+                {products[currentIndex].name}
+              </h3>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );
