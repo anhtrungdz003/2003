@@ -1,37 +1,52 @@
-import React from "react";
+// src/components/ProductCard.tsx
+import { Link } from "react-router-dom";
 
-interface ProductCardProps {
+interface Product {
+  id: number;
   name: string;
-  price: number;
+  price?: number; // banner không cần
   image: string;
-  onAddToCart: () => void;
+  banner?: boolean; // true nếu dùng banner
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
+export default function ProductCard({
+  id,
   name,
   price,
   image,
-  onAddToCart,
-}) => {
+  banner,
+}: Product) {
+  if (banner) {
+    // Hiển thị banner: chỉ ảnh + tên
+    return (
+      <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden shadow-lg">
+        <img src={image} alt={name} className="w-full h-full object-cover" />
+        <div className="absolute bottom-4 left-4 bg-black/50 text-white p-2 rounded">
+          <h3 className="font-bold text-lg md:text-2xl">{name}</h3>
+        </div>
+      </div>
+    );
+  }
+
+  // Chế độ bình thường (grid/list)
   return (
-    <div className="border rounded p-4 flex flex-col items-center shadow hover:shadow-lg transition">
-      <img
-        src={image}
-        alt={name}
-        className="w-full h-48 object-cover mb-2 rounded"
-      />
-      <h3 className="font-bold text-center">{name}</h3>
-      <span className="text-amber-800 font-semibold">
-        {price.toLocaleString()}₫
-      </span>
-      <button
-        className="bg-amber-500 text-white px-4 py-2 mt-2 rounded hover:bg-amber-600 transition"
-        onClick={onAddToCart}
-      >
-        Thêm vào giỏ
-      </button>
+    <div className="border rounded-xl bg-white shadow hover:shadow-lg hover:scale-105 transition-transform duration-300">
+      <Link to={`/product/${id}`}>
+        <img
+          src={image}
+          alt={name}
+          className="w-full aspect-[4/3] object-cover rounded-t-xl"
+        />
+      </Link>
+      <div className="p-4 text-center">
+        <h3 className="font-semibold text-lg mb-2">{name}</h3>
+        <p className="text-primary font-bold">
+          {price?.toLocaleString("vi-VN")}đ
+        </p>
+        <button className="mt-3 bg-primary text-white px-4 py-2 rounded-lg hover:bg-amber-600 hover:shadow-md transition">
+          Thêm vào giỏ
+        </button>
+      </div>
     </div>
   );
-};
-
-export default ProductCard;
+}

@@ -1,24 +1,61 @@
-import React from "react";
+import { ShoppingCart, User, Search } from "lucide-react";
+import { useState } from "react";
+import AuthModal from "./AuthModal";
 
-const Header: React.FC = () => {
+export default function Header() {
+  const [showAuth, setShowAuth] = useState(false);
+
   return (
-    <header className="bg-amber-50 shadow-md py-4 px-4 sm:px-8 flex flex-col sm:flex-row justify-between items-center sticky top-0 z-50">
-      <h1 className="text-2xl font-bold text-amber-800 mb-2 sm:mb-0">
-        2003-Mixiao
-      </h1>
-      <div className="flex w-full sm:w-auto">
-        <input
-          type="text"
-          placeholder="Tìm sản phẩm..."
-          className="flex-1 border rounded-l px-2 py-1 focus:outline-none"
-        />
-        <button className="bg-amber-500 text-white px-4 py-1 rounded-r hover:bg-amber-600 transition">
-          Tìm
-        </button>
-      </div>
-      <div className="mt-2 sm:mt-0">🛒</div>
-    </header>
-  );
-};
+    <>
+      <header className="bg-amber-50 shadow-md fixed top-0 left-0 w-full z-50">
+        <div className="max-w-7xl mx-auto flex items-center justify-between p-4 flex-wrap gap-3">
+          {/* Logo */}
+          <div className="text-2xl font-bold text-amber-600">
+            🍹 2003 Drinks
+          </div>
 
-export default Header;
+          {/* Menu */}
+          <nav className="flex gap-6 text-gray-700 font-medium flex-wrap justify-center">
+            <a href="/" className="hover:text-amber-600">
+              Trang chủ
+            </a>
+            <a href="/products" className="hover:text-amber-600">
+              Sản phẩm
+            </a>
+            <a href="/news" className="hover:text-amber-600">
+              Tin tức
+            </a>
+            <a href="/about" className="hover:text-amber-600">
+              Về chúng tôi
+            </a>
+          </nav>
+
+          {/* Search + Icons */}
+          <div className="flex items-center gap-3">
+            <div className="flex items-center border rounded-full px-3 py-1 bg-white">
+              <input
+                type="text"
+                placeholder="Tìm kiếm..."
+                className="outline-none text-sm px-2 w-32 sm:w-48"
+              />
+              <Search className="text-gray-500 w-5 h-5" />
+            </div>
+
+            <ShoppingCart
+              className="text-gray-700 cursor-pointer hover:text-amber-600"
+              size={22}
+            />
+            <button
+              onClick={() => setShowAuth(true)}
+              className="flex items-center gap-1 bg-amber-500 text-white px-3 py-1 rounded-full hover:bg-amber-600 transition"
+            >
+              <User size={18} /> Đăng nhập
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <AuthModal isOpen={showAuth} onClose={() => setShowAuth(false)} />
+    </>
+  );
+}
